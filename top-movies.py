@@ -17,14 +17,24 @@ containers = driver.find_elements(by="xpath", value='//div[@class="movies-list-i
 #this one return one
 # containers = driver.find_element(by="xpath", value='//div[@class="movies-list-item"]/div[@class="info-list"]/div[@class="sum-vote"]')
 
+
+sum_votes = []
+titles = []
+links = []
+
+
+
 #containers is a list and container is a single element
 for container in containers:
 #    driver.find_element(by="xpath", value='//div[@class="movies-list-item"]/div[@class="info-list"]/div[@class="sum-vote"]/div/text()')
     sum_vote = container.find_element(by="xpath", value='//div[@class="movies-list-item"]/div[@class="info-list"]/div[@class="sum-vote"]/div').text
     title = container.find_element(by="xpath", value='//div[@class="movies-list-item"]/div[@class="opis-list"]/div[@class="title"]/a').text
-
     link = container.find_element(by="xpath", value='//div[@class="movies-list-item"]/div[@class="opis-list"]/div[@class="title"]/a').get_attribute("href")
 
+    # appending each element to the list
+    sum_votes.append(sum_vote)
+    titles.append(title)
+    link.append(link)
 
 
 # xpath
