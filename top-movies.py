@@ -27,12 +27,13 @@ links = []
 
 #containers is a list and container is a single element
 for container in containers:
+#    print(container.find_element(by="xpath", value='//div[@class="movies-list-item"]/div[@class="info-list"]/div[@class="sum-vote"]/div').text)
 #    driver.find_element(by="xpath", value='//div[@class="movies-list-item"]/div[@class="info-list"]/div[@class="sum-vote"]/div/text()')
-    sum_vote = container.find_element(by="xpath", value='//div[@class="movies-list-item"]/div[@class="info-list"]/div[@class="sum-vote"]/div').text
-    title = container.find_element(by="xpath", value='//div[@class="movies-list-item"]/div[@class="opis-list"]/div[@class="title"]/a').text
-    link = container.find_element(by="xpath", value='//div[@class="movies-list-item"]/div[@class="opis-list"]/div[@class="title"]/a').get_attribute("href")
-
-    # appending each element to the list
+    sum_vote = container.find_element(by="xpath", value='./div[@class="info-list"]/div[@class="sum-vote"]/div').text
+    title = container.find_element(by="xpath", value='./div[@class="opis-list"]/div[@class="title"]/a').text
+    link = container.find_element(by="xpath", value='./div[@class="opis-list"]/div[@class="title"]/a').get_attribute("href")
+#
+ #   # appending each element to the list
     sum_votes.append(sum_vote)
     titles.append(title)
     links.append(link)
