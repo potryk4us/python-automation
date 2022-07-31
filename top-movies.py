@@ -3,7 +3,7 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
 import pandas as pd
 
-website = "https://ekino-tv.pl/movie/cat/+kategoria[17]+wersja[Lektor]+/"
+website = 'https://ekino-tv.pl/movie/cat/+kategoria[17]+wersja[Lektor]+/'
 path = 'C:/Users/potrykus/Downloads/chromedriver.exe'
 
 # headless-mode
@@ -22,19 +22,16 @@ containers = driver.find_elements(by="xpath", value='//div[@class="movies-list-i
 #this one return one
 # containers = driver.find_element(by="xpath", value='//div[@class="movies-list-item"]/div[@class="info-list"]/div[@class="sum-vote"]')
 
-
-sum_votes = []
 titles = []
+sum_votes = []
 links = []
-
-
 
 #containers is a list and container is a single element
 for container in containers:
 #    print(container.find_element(by="xpath", value='//div[@class="movies-list-item"]/div[@class="info-list"]/div[@class="sum-vote"]/div').text)
 #    driver.find_element(by="xpath", value='//div[@class="movies-list-item"]/div[@class="info-list"]/div[@class="sum-vote"]/div/text()')
-    title = container.find_element(by="xpath", value='./div[@class="opis-list"]/div[@class="title"]/a').text
-    sum_vote = container.find_element(by="xpath", value='./div[@class="info-list"]/div[@class="sum-vote"]/div').text
+    title = container.find_element(by="xpath", value='./div[@class="opis-list"]/div[@class="title"]/a').get_attribute('textContent')
+    sum_vote = container.find_element(by="xpath", value='./div[@class="info-list"]/div[@class="sum-vote"]/div').get_attribute('textContent')
     link = container.find_element(by="xpath", value='./div[@class="opis-list"]/div[@class="title"]/a').get_attribute("href")
 #
  #   # appending each element to the list
@@ -43,7 +40,7 @@ for container in containers:
     links.append(link)
 
 # dictionary consist of a key and a key value pair.
-my_dict = {'title': titles, 'vote': sum_votes, 'url': links}
+my_dict = {'title': titles, 'url': links, 'vote': sum_votes}
 
 df_headlines = pd.DataFrame(my_dict)
 df_headlines.to_csv('headlines-headless.csv')
