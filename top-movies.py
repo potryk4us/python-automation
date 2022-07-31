@@ -25,6 +25,7 @@ containers = driver.find_elements(by="xpath", value='//div[@class="movies-list-i
 titles = []
 sum_votes = []
 links = []
+ratings = []
 
 #containers is a list and container is a single element
 for container in containers:
@@ -32,15 +33,17 @@ for container in containers:
 #    driver.find_element(by="xpath", value='//div[@class="movies-list-item"]/div[@class="info-list"]/div[@class="sum-vote"]/div/text()')
     title = container.find_element(by="xpath", value='./div[@class="opis-list"]/div[@class="title"]/a').get_attribute('textContent')
     sum_vote = container.find_element(by="xpath", value='./div[@class="info-list"]/div[@class="sum-vote"]/div').get_attribute('textContent')
+    rating = container.find_element(by="xpath", value='./div[@class="info-list"]/font[2]').get_attribute('textContent')
     link = container.find_element(by="xpath", value='./div[@class="opis-list"]/div[@class="title"]/a').get_attribute("href")
 #
  #   # appending each element to the list
     titles.append(title)
     sum_votes.append(sum_vote)
+    ratings.append(rating)
     links.append(link)
 
 # dictionary consist of a key and a key value pair.
-my_dict = {'title': titles, 'url': links, 'vote': sum_votes}
+my_dict = {'title': titles, 'url': links, 'vote': sum_votes, 'rating': ratings}
 
 df_headlines = pd.DataFrame(my_dict)
 df_headlines.to_csv('headlines-headless.csv')
